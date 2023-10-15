@@ -22,19 +22,29 @@ internal class Program {
         bool IsAnagram(string s, string t) {
             char[] SChars = s.ToCharArray();
             char[] TChars = t.ToCharArray();
-            int cont = 0;
-            //Constraint: 
-
-            //1) Mesmas letras 
 
             for (int i = 0; i < SChars.Length; i++) {
                 char c = SChars[i];
-                for (int j = 0; j < TChars.Length; j++) {
+
+                for (int j = 0; j < TChars.Length; i++) {
+
                     if (c.Equals(TChars[j])) {
-                        cont++;
-                        if (cont.Equals(TChars.Length)) {
-                            return true;
+
+                        char[] arrAux = new char[TChars.Length - 1];
+
+                        for (int a = 0; a < arrAux.Length; a++) {
+                           
+                            if (a.Equals(j)) {
+                                
+                                continue;
+                            }
+                            
+                            arrAux[a] = TChars[a];
+                            TChars[a] = arrAux[a];
+
                         }
+
+
                     }
                 }
             }
@@ -42,7 +52,7 @@ internal class Program {
 
         }
 
-        Console.WriteLine(IsAnagram("amor", "roma"));
+        Console.WriteLine(IsAnagram("anagram", "nagaram"));
 
     }
 
