@@ -39,9 +39,7 @@ internal class Program {
                         chart[j] = chart[j+1];
                         chart[j+1] = aux;
                     }
-
                 }
-
             }
 
             int cont = 0;
@@ -53,21 +51,8 @@ internal class Program {
             }
 
             if (cont.Equals(chars.Length)) {
-                Console.WriteLine("A palavra é anagrama");
                 return true;
             }
-
-
-
-            //foreach (char c in chars) {
-            //    Console.WriteLine(c);
-            //}
-
-            //Console.WriteLine(" ");
-
-            //foreach (char c in chart) {
-            //    Console.WriteLine(c);
-            //}
 
             return false;
 
