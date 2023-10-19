@@ -19,97 +19,36 @@ internal class Program {
 
         bool IsAnagram (string s, string t) {
 
-            char[] chars = s.ToCharArray();
-            char[] chart = t.ToCharArray();
-            Dictionary<char, int> DicS = new Dictionary<char, int>();
-            Dictionary<char, int> DicT= new Dictionary<char, int>();
-            
+            if (s.Length != t.Length) {
+                return false;
+            }
 
-            for (int i = 0; i < chars.Length; i++) {
-                int cont = 0;
-                char aux = chars[i];
-                for (int j = 0; j < chars.Length; j++) {
-                    if (aux.Equals(chars[j])) {
-                        cont++;
+            Dictionary<char, int> dic = new Dictionary<char, int>(); 
+
+            foreach (char c in s) {
+                if (dic.ContainsKey(c)) {
+                    dic[c]++;
+                }
+                else {
+                    dic[c] = 1;
+                }
+            }
+
+            foreach (char c in t) {
+                if (dic.ContainsKey(c)) {
+                    dic[c]--;
+                    if (dic[c].Equals(0)) {
+                        dic.Remove(c);
                     }
                 }
-                if (DicS.ContainsKey(aux)) {
-                    continue;
+                else {
+                    return false;
                 }
-
-                DicS.Add(aux, cont);
             }
-
-            for (int i = 0; i < chart.Length; i++) {
-                int cont = 0;
-                char aux = chart[i];
-                for (int j = 0; j < chart.Length; j++) {
-                    if (aux.Equals(chart[j])) {
-                        cont++;
-                    }
-                }
-                if (DicT.ContainsKey(aux)) {
-                    continue;
-                }
-                DicT.Add(aux, cont);
-            }
-
-            int contador = 0;
-            foreach (var i in DicS) {
-                char aux = i.Key;
-                foreach (var j in DicT) {
-                    if (i.Key.Equals(j.Key) && i.Value.Equals(j.Value)) {
-                        contador++;
-                    }
-                }
-                
-            }
-            if (contador.Equals(DicT.Count) && contador.Equals(DicS.Count)) {
-                return true;
-            }
-
-            return false;
-           
-
-
-            //for (int i = 0; i < chars.Length - 1; i++) {
-            //    for (int j = 0; j < chars.Length - i -1; j++) {
-            //        if (chars[j] > chars[j+1]) {
-            //            char aux = chars[j];
-            //            chars[j] = chars[j+1];
-            //            chars[j+1] = aux;
-            //        }
-            //    }
-            //}
-
-            //for (int i = 0; i < chart.Length - 1; i++) {
-            //    for (int j = 0; j < chart.Length - i - 1; j++) {
-            //        if (chart[j] > chart[j+1]) {
-            //            char aux = chart[j];
-            //            chart[j] = chart[j+1];
-            //            chart[j+1] = aux;
-            //        }
-            //    }
-            //}
-
-            //int cont = 0;
-            //for (int i = 0; i < chars.Length; i++) {
-            //    if (chars[i] != chart[i]) {
-            //        break;
-            //    }
-            //    cont++;
-            //}
-
-            //if (cont.Equals(chars.Length)) {
-            //    Console.WriteLine("deu bom");
-            //    return true;
-            //}
-
-            //return false;
-
+            return dic.Count == 0;
         }
 
-        Console.WriteLine(IsAnagram("ab", "a"));
+        Console.WriteLine(IsAnagram("a", "ab"));
         
 
     }
